@@ -1,0 +1,52 @@
+name: Prepare pinned public Data 1 artifact
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/data1-artifact.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-data1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact audited public CSVs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data1
+          BASE='https://raw.githubusercontent.com/wwwxmu/Dataset-of-financial-news-sentiment-classification/9e3166942fed246c193ec67996d5294debfd71e3'
+          curl -fL "$BASE/train_data.csv" -o data1/train_data.csv
+          curl -fL "$BASE/test_data.csv" -o data1/test_data.csv
+
+      - name: Verify Git blob identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          TRAIN_SHA=$(git hash-object data1/train_data.csv)
+          TEST_SHA=$(git hash-object data1/test_data.csv)
+          echo "train blob: $TRAIN_SHA"
+          echo "test blob:  $TEST_SHA"
+          test "$TRAIN_SHA" = '060c4c28174d6f7c62237af625266ffa76455d9f'
+          test "$TEST_SHA" = '9ddd2c7e5b3fa87859939db430a93cbc41e644f5'
+
+      - name: Write provenance
+        shell: bash
+        run: |
+          cat > data1/PROVENANCE.txt <<'EOF'
+          Source repository: wwwxmu/Dataset-of-financial-news-sentiment-classification
+          Pinned commit: 9e3166942fed246c193ec67996d5294debfd71e3
+          train_data.csv blob: 060c4c28174d6f7c62237af625266ffa76455d9f
+          test_data.csv blob: 9ddd2c7e5b3fa87859939db430a93cbc41e644f5
+          EOF
+
+      - name: Upload verified CSV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: data1-public-csvs
+          path: data1/
+          if-no-files-found: error
+          retention-days: 30

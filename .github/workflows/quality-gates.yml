@@ -1,0 +1,44 @@
+name: Repository quality gates
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Reject retired terminology
+        shell: bash
+        run: |
+          set -euo pipefail
+          retired=$(printf '\x44\x46\x52\x4e')
+          if grep -Rni --exclude-dir=.git -- "$retired" .; then
+            echo 'Retired terminology detected.' >&2
+            exit 1
+          fi
+
+      - name: Install test dependencies
+        run: python -m pip install numpy pandas scipy scikit-learn torch pytest openpyxl
+
+      - name: Run unit tests
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q
+
+      - name: Run smoke and detector stress checks
+        env:
+          PYTHONPATH: src
+        run: |
+          python tests/smoke_test.py
+          python tests/stress_test_detector.py

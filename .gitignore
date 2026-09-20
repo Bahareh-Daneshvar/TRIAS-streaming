@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.DS_Store
+.ipynb_checkpoints/
+data/raw/
+data/processed/
+outputs/
+artifacts/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+
+# Research data and generated outputs
+data/raw/
+data/processed/
+outputs/
+*.pt
+*.ckpt

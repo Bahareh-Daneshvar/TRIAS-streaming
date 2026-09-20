@@ -1,0 +1,72 @@
+{
+  "audit_source": "GitHub connector, public repository blobs",
+  "repository": "wwwxmu/Dataset-of-financial-news-sentiment-classification",
+  "repository_head_audited": "9e3166942fed246c193ec67996d5294debfd71e3",
+  "train_blob_sha1": "060c4c28174d6f7c62237af625266ffa76455d9f",
+  "test_blob_sha1": "9ddd2c7e5b3fa87859939db430a93cbc41e644f5",
+  "train": {
+    "rows": 13736,
+    "labels": {"0": 6868, "1": 6868},
+    "date_failures": 0,
+    "date_min": "2016-03-22",
+    "date_max": "2019-02-14",
+    "unique_days": 246,
+    "duplicate_title_extra": 1736,
+    "duplicate_body_extra": 560,
+    "duplicate_title_body_extra": 159,
+    "exact_semantic_duplicate_extra": 156
+  },
+  "test": {
+    "rows": 2400,
+    "labels": {"0": 1200, "1": 1200},
+    "date_failures": 0,
+    "date_min": "2016-03-22",
+    "date_max": "2019-02-14",
+    "unique_days": 241,
+    "duplicate_title_extra": 159,
+    "duplicate_body_extra": 16,
+    "duplicate_title_body_extra": 15,
+    "exact_semantic_duplicate_extra": 14
+  },
+  "combined": {
+    "rows": 16136,
+    "labels": {"0": 8068, "1": 8068},
+    "date_min": "2016-03-22",
+    "date_max": "2019-02-14",
+    "unique_days": 246,
+    "yearly_counts": {"2016": 546, "2017": 5428, "2018": 8457, "2019": 1705},
+    "duplicate_title_extra": 2566,
+    "duplicate_title_body_extra": 275,
+    "exact_semantic_duplicate_extra": 268,
+    "train_test_unique_title_overlap": 671,
+    "train_test_unique_title_body_overlap": 101
+  },
+  "day_grouped_split": {
+    "reference_end": "2017-09-12",
+    "calibration_end": "2017-11-23",
+    "reference_rows": 3233,
+    "calibration_rows": 1647,
+    "stream_rows": 11256,
+    "reference_labels": {"0": 1642, "1": 1591},
+    "calibration_labels": {"0": 785, "1": 862},
+    "stream_labels": {"0": 5641, "1": 5615}
+  },
+  "stream_density": {
+    "stream_unique_days": 117,
+    "daily_rows_min": 10,
+    "daily_rows_median": 95,
+    "daily_rows_q95": 169.6,
+    "daily_rows_max": 370,
+    "date_gap_days_median": 1,
+    "date_gap_days_q95": 12,
+    "date_gap_days_max": 145,
+    "gaps_gt_7_days": 8,
+    "target_128_day_grouped_chunks": 87,
+    "target_128_size_min": 53,
+    "target_128_size_median": 124,
+    "target_128_size_q75": 146.5,
+    "target_128_size_max": 370,
+    "target_128_days_per_chunk_median": 1,
+    "target_128_days_per_chunk_max": 3
+  }
+}

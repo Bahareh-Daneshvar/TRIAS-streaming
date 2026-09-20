@@ -1,0 +1,64 @@
+seed: 42
+method:
+  name: TRIAS
+  expansion: Tri-view Robust Incremental Adaptation for Streams
+  novelty_target: tri_view_shift_signature_routed_module_adaptation
+terminology:
+  label_free_signal: distribution_shift
+  strict_concept_drift_requires_labels_or_controlled_ground_truth: true
+
+data1_provenance:
+  repository: wwwxmu/Dataset-of-financial-news-sentiment-classification
+  branch: master
+  repository_head_audited: 9e3166942fed246c193ec67996d5294debfd71e3
+  train_blob_sha1: 060c4c28174d6f7c62237af625266ffa76455d9f
+  test_blob_sha1: 9ddd2c7e5b3fa87859939db430a93cbc41e644f5
+  accessible_train_test_rows: 16136
+  note: accessible CSVs do not match the README/manuscript claim of 17149 rows
+
+stream:
+  protocol: chronological_prequential_test_then_train
+  reference_policy_primary: fixed
+  adaptive_reference_sensitivity: true
+  split_grouping: complete_calendar_days
+  reference_fraction_design: 0.20
+  calibration_fraction_design: 0.10
+  audited_reference_end: 2017-09-12
+  audited_calibration_end: 2017-11-23
+  audited_reference_rows: 3233
+  audited_calibration_rows: 1647
+  audited_stream_rows: 11256
+  chunk_grouping: complete_calendar_days
+  chunk_target_primary: 128
+  chunk_target_sensitivity: [64, 256]
+  audited_primary_chunk_count: 87
+  monitor_window_rows: 128
+  monitor_window_policy: trailing_fixed_size_at_chunk_boundary
+
+model:
+  host_backbone: fusion host
+  exact_source_small_encoder_available: false
+  primary_data1_task: sentiment_only
+  gru_hidden: 64
+  gru_layers: 2
+  cnn_channels: 256
+  cnn_kernels: [2, 3, 4]
+  dropout: 0.2
+
+drift:
+  projections: 32
+  weights: [0.3333333333, 0.3333333333, 0.3333333334]
+  calibration_mode: fixed_reference_contiguous_calibration_windows
+  calibration_stride: 1
+  calibration_expected_comparisons: 1520
+  mild_quantile: 0.90
+  moderate_quantile: 0.97
+  severe_quantile: 0.995
+  routing_view_high_quantile: 0.99
+routing:
+  dominance_ratio: 1.25
+  deep_encoder_requires_representation_view_high: true
+adaptation:
+  supervision_primary: delayed_labels_after_prediction
+  trigger_requires_labels: false
+  top_encoder_blocks_severe: 1
