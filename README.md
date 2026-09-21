@@ -1,6 +1,6 @@
 # TRIAS Journal Upgrade v0.6
 
-**Current stage:** Phase 1 executed on the pinned public Data 1 artifact; chronology and chunk policy validated with zero day-boundary leakage; fusion host initialization and the B0-B7 pilot are next.
+**Current stage:** Phase 1 is complete and the first full-stream, three-seed B0-B7 feasibility pilot is executable. The current routing-superiority claim is on HOLD because B7 did not improve on B6; see `PILOT_GO_NO_GO_v0_8.md`.
 
 See `DATA1_REMOTE_AUDIT_v0_6.md`, `PHASE1_EXECUTION_v0_7.md`, and `STATUS_v0_6.md`.
 
@@ -36,6 +36,7 @@ to decide **where** adaptation should occur. Severity constrains the budget; the
 - `src/data1.py`, `src/data_audit.py`: public Data-1 normalization/audit
 - `src/train_utils.py`: training/prediction utilities
 - `src/synthetic_stream.py`, `src/stream_metrics.py`: controlled implementation stress tests
+- `src/char_fusion.py`, `src/pilot_b0_b7.py`: explicitly non-final B0-B7 feasibility pilot
 
 ## Checks
 ```bash
