@@ -1,12 +1,12 @@
 # TRIAS Journal Upgrade v0.6
 
-**Current stage:** Phase 1 is complete and the first full-stream, three-seed B0-B7 feasibility pilot is executable. The current routing-superiority claim is on HOLD because B7 did not improve on B6; see `PILOT_GO_NO_GO_v0_8.md`.
+**Current stage:** Phase 1 and the first full-stream, three-seed feasibility pilot are executable. A leakage-safe one-step counterfactual diagnostic rejects the current hand-written routing-superiority claim; see `COUNTERFACTUAL_ROUTING_DIAGNOSTIC_v0_9.md`. The next admissible routing experiment requires a predeclared temporal development/holdout split and a frozen policy.
 
 See `DATA1_REMOTE_AUDIT_v0_6.md`, `PHASE1_EXECUTION_v0_7.md`, and `STATUS_v0_6.md`.
 
 **TRIAS = Tri-view Robust Incremental Adaptation for Streams**
 
-TRIAS is a model-agnostic controller tested first on a transparent **fusion host** classifier. Its current novelty target is **tri-view shift-signature-routed module adaptation**, not generic severity-aware retraining.
+TRIAS is a model-agnostic streaming research framework tested first on a transparent **fusion host** classifier. Tri-view monitoring remains under study, but the present hand-written module router is a rejected diagnostic baseline rather than a validated novelty claim.
 
 ## Why v0.4 changed direction
 A 2025 paper already combines multiple statistical drift measures into a severity score and uses severity to choose incremental vs full retraining. A 2026 preprint also uses severity/performance signals for head-vs-deeper parameter-efficient adaptation. Therefore severity-aware updating alone is not a defensible novelty claim.
@@ -37,6 +37,7 @@ to decide **where** adaptation should occur. Severity constrains the budget; the
 - `src/train_utils.py`: training/prediction utilities
 - `src/synthetic_stream.py`, `src/stream_metrics.py`: controlled implementation stress tests
 - `src/char_fusion.py`, `src/pilot_b0_b7.py`: explicitly non-final B0-B7 feasibility pilot
+- `src/counterfactual_routing_diagnostic.py`: leakage-safe one-step action-benefit diagnostic
 
 ## Checks
 ```bash
